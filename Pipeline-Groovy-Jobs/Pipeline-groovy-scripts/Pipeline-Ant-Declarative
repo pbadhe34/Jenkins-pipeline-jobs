@@ -1,0 +1,13 @@
+ pipeline {
+    agent any
+    tools {
+        ant 'ant' 
+    }
+    stages {
+        stage('Ant Version Run') {
+            steps {
+                sh 'ant -version'
+            }
+        }
+    }
+}

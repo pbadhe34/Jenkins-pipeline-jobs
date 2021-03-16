@@ -1,0 +1,44 @@
+node {  
+    stage('Build') { 
+        echo "Build Stage" 
+    }
+    stage('Test') { 
+        echo "Test Stage" 
+    }
+    stage('Deploy') { 
+       echo "Deploy Stage" 
+       echo "Running Job : ${env.JOB_NAME} Build no : ${env.BUILD_ID} on ${env.JENKINS_URL}"
+    }
+     stage('Run Groovy') { 
+       echo "Run Stage" 
+       for (i=0; i<2; i++) { 
+           stage "Stage #"+i
+           print 'Test, world !'
+           if (i==0)
+           {
+              // git  clone <url>
+               echo 'Running on Stage #0'
+           }
+           else {
+               //build 'The pipeline'
+               echo 'Running on Stage #1'
+           }
+      }
+    }
+    
+}
+----------------------
+node {
+     
+    env.Branch = 'master1'  
+  
+    stage('Scripted Stage') {
+        if (env.Branch == 'master') {
+            echo 'I  execute on the master branch'
+        } else {
+            echo 'I execute elsewhere'
+        }
+    }
+}
+----------------------
+

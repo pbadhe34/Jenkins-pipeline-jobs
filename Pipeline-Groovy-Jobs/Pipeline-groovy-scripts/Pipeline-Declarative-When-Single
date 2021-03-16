@@ -1,0 +1,22 @@
+pipeline {
+    agent any
+    
+    environment {
+    branch = 'production'  
+   }
+    stages {
+        stage('Test Build') {
+            steps {
+                echo 'Run World'
+            }
+        }
+        stage('Simple Deploy') {
+            when {
+                branch: 'production'
+            }
+            steps {
+                echo 'Deploying'
+            }
+        }
+    }
+}

@@ -1,0 +1,3 @@
+export PATH="/home/dell/Desktop/Jenkins-CI-Introduction/BrowserDrivers:$PATH"
+
+robot --variable BROWSER:FireFox login_tests

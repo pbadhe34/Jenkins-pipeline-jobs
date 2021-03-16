@@ -1,0 +1,5 @@
+ export CATALINA_HOME=/home/dell/Tomcat/apache-tomcat-8.5.40
+
+ cd /home/dell/Tomcat/apache-tomcat-8.5.40/bin
+>sudo ./startup.sh
+

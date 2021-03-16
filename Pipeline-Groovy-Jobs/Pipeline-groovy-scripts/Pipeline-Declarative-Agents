@@ -1,0 +1,41 @@
+pipeline {
+    agent none
+    stages {
+        stage('Build') {
+            agent any
+            steps {
+                 
+                echo "First Stage" 
+            }
+        }
+        stage('Test on Slave1') {
+            agent { 
+                label 'slave1'
+            }
+            steps {
+                 
+                sh 'pwd'
+            }
+            post {
+                always {
+                    echo "run on Linux slave"
+                }
+            }
+        }
+        stage('Test on Master') {
+            agent {
+                label 'master'
+            }
+            steps {
+                 
+                //bat 'make check' 
+                echo "running on Master"
+            }
+            post {
+                always {
+                     echo "Ran on Master Node"
+                }
+            }
+        }
+    }
+}

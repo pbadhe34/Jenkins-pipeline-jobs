@@ -1,0 +1,6 @@
+Read Jenkins Groovy Version
+ Run the script in jenkins groovy console
+  
+  println GroovySystem.version
+  -->2.4.12
+

@@ -1,0 +1,79 @@
+pipeline {
+    agent any 
+    stages {
+        stage('Stage 1') {
+            steps {
+                echo 'Hello world!' 
+            }
+        }
+    }
+}
+
+-------------------------
+
+ pipeline {
+    agent any 
+     stages {
+        stage('Build') { 
+            steps {
+                echo 'Cloning the Code from GitHub!' 
+                echo 'Compiling the local cloned Code' 
+                echo 'Package the cloned Code' 
+                
+            }
+        }
+        stage('Test') { 
+            steps {
+               echo 'Compiling the Test Code' 
+               echo 'Running the Unit Test Code' 
+               echo 'Running the Integratiin Test ' 
+            }
+        }
+        stage('Deploy') { 
+            steps {
+                echo 'Creating the deployment package' 
+                echo 'Deploying the package on server' 
+                echo 'Startring the server ' 
+                echo 'Running the Acceptance Test Code'
+                echo 'Measuring the Code coverage' 
+                echo 'Analyse the code quality ' 
+            }
+        }
+        stage('Operations') { 
+            steps {
+                echo 'Getting the deployment feedback' 
+                echo 'Generate the email' 
+                echo 'Monitoring the servers ' 
+                echo 'Running the Maintenance cycle'
+            }
+        }
+       
+        stage("Parallel Execution") {
+        steps {
+         parallel (
+           "UpdateDispatch" : {
+              echo 'Courier Info'
+           },
+          "UpdateAccounts" : {
+             echo 'Account update '
+           }
+          )
+        }
+       }
+       stage('Try and Wait') {
+      steps {
+        retry(5) { // It Retries 5 number of times mentioned until its successful
+          //sh './deploy.sh'
+          echo 'Retrying'
+        }
+        timeout(time: 15, unit: 'MINUTES') { // Time out option will make the step wait for x mins to execute if it takes more than that it will fail
+         // sh './readiness-check.sh'
+          echo 'Check the output wuth timeout'
+        }
+      }
+    }
+        
+     
+   }
+}
+-------------------------

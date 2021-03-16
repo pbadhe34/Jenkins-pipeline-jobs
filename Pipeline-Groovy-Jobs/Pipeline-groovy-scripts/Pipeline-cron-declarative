@@ -1,0 +1,17 @@
+pipeline {
+  agent any
+  triggers {
+    cron('H/2 * * * *')
+  }
+  
+  //triggers { pollSCM('H */4 * * 1-5') }
+  //triggers { upstream(upstreamProjects: 'job1,job2', threshold: hudson.model.Result.SUCCESS) }
+  
+  stages {
+    stage('Periodic Run') {
+      steps {
+        echo 'Run Again and Again'
+      }
+    }
+  }
+}

@@ -1,0 +1,12 @@
+node {
+    stage('Try-Catch') {
+        try {
+            sh 'exit 1'
+        }
+        catch (exc) {
+            echo 'Something failed, I should sound the Jenkins!'
+            throw exc
+        }
+    }
+}
+

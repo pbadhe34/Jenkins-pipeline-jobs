@@ -1,0 +1,45 @@
+pipeline {
+  agent any
+
+  environment {
+    Branch = 'dev'  
+    USE_JDK = 'true'
+    RunJRE ='c:/Java/jdk1.8'
+  }
+
+  stages {
+    stage('Print') {
+      steps {
+       // sh 'printenv'
+       echo "Test"
+      }
+    }
+    
+    stage('Deploy Production') {
+    when {
+      anyOf {
+        environment name: 'Branch', value: 'prod'
+        environment name: 'Branch', value: 'test'
+      }
+    }
+    steps {
+      echo 'Prod deoloy to : '+ env.Branch
+    }
+    
+   }
+    stage('Deploy Development') {
+    when {
+      anyOf {
+        environment name: 'Branch', value: 'dev'
+      }
+    }
+    steps {
+      echo 'Dev deoloy to : '+ env.Branch
+    }
+    
+   }
+   
+     
+    
+  }
+}
